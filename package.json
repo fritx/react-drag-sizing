@@ -1,0 +1,13 @@
+{
+  "name": "react-drag-resize",
+  "version": "0.0.1",
+  "repository": "fritx/react-drag-resize",
+  "license": "MIT",
+  "main": "src/DragResize.js",
+  "scripts": {},
+  "peerDependencies": {
+    "react": "*",
+    "react-dom": "*"
+  },
+  "dependencies": {}
+}
