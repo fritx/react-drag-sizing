@@ -3,6 +3,7 @@
 - [x] "Drag to resize" as Component
 - [x] Rewritten with TS & React-hooks
 - [ ] Polyfill workaround with React < 16.8
+- [x] Support both mouse & touch
 - [x] Rollup bundle for both esm & umd
 - [x] Default handlerWidth=16, handlerOffset=-w/2, handlerZIndex=10
 - [x] Legacy branch: https://github.com/fritx/react-drag-sizing/tree/legacy
@@ -34,11 +35,19 @@ import DragSizing from 'react-drag-sizing'
 #### Props
 
 ```tsx
+export type MEvent = MouseEvent | TouchEvent;
+export type RdsMEvent =
+  | MouseEvent
+  | (TouchEvent & {
+      clientX: number;
+      clientY: number;
+    });
+
 export interface DragSizingProps {
   border: 'top' | 'bottom' | 'left' | 'right';
-  onStart?: DragHandlerProps['onStart'];
-  onEnd?: DragHandlerProps['onEnd'];
-  onUpdate?: DragHandlerProps['onUpdate'];
+  onStart?: (e: RdsMEvent) => void;
+  onEnd?: (e: RdsMEvent) => void;
+  onUpdate?: (e: RdsMEvent) => void;
   id?: string;
   className?: string;
   style?: React.CSSProperties;

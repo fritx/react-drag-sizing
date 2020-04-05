@@ -1,16 +1,25 @@
+export type MEvent = MouseEvent | TouchEvent;
+
+export type RdsMEvent =
+  | MouseEvent
+  | (TouchEvent & {
+      clientX: number;
+      clientY: number;
+    });
+
 export interface DragHandlerProps {
   dir: 'ew' | 'ns';
-  onStart: (e: MouseEvent) => void;
-  onEnd: (e: MouseEvent) => void;
-  onUpdate: (e: MouseEvent) => void;
+  onStart: (e: MEvent) => void;
+  onEnd: (e: MEvent) => void;
+  onUpdate: (e: MEvent) => void;
   className?: string;
   style?: React.CSSProperties;
 }
 
 export interface DragHandlerData {
   listenersRef: {
-    handleMouseMove: (e: MouseEvent) => void;
-    handleMouseUp: (e: MouseEvent) => void;
+    handleMouseMove: (e: MEvent) => void;
+    handleMouseUp: (e: MEvent) => void;
   } | null;
 }
 

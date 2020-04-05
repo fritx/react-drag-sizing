@@ -1,11 +1,12 @@
 import React, { useCallback, useRef, useState } from 'react';
 import { DragHandler } from './DragHandler';
-import { DragSizingData, DragSizingProps } from './types';
+import { DragSizingData, DragSizingProps, MEvent } from './types';
 import {
   getContainerInfo,
   getContainerMeta,
   getHandlerInfo,
   isNil,
+  normalizeMEvent,
 } from './util';
 
 export const DragSizing: React.FC<DragSizingProps> = props => {
@@ -53,7 +54,9 @@ export const DragSizing: React.FC<DragSizingProps> = props => {
   });
 
   const handleStart = useCallback(
-    (e: MouseEvent) => {
+    (_e: MEvent) => {
+      const e = normalizeMEvent(_e);
+
       const { wh, xy } = containerMeta;
       const el = boxRef.current;
       if (!el) return;
@@ -70,14 +73,17 @@ export const DragSizing: React.FC<DragSizingProps> = props => {
   );
 
   const handleEnd = useCallback(
-    (e: MouseEvent) => {
+    (_e: MEvent) => {
+      const e = normalizeMEvent(_e);
       if (onEnd) onEnd(e);
     },
     [onEnd]
   );
 
   const handleUpdate = useCallback(
-    (e: MouseEvent) => {
+    (_e: MEvent) => {
+      const e = normalizeMEvent(_e);
+
       const { xy } = containerMeta;
       if (oldCoordRef.current === null) return;
 

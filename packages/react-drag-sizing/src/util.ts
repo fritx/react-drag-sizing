@@ -1,7 +1,23 @@
-import { DragHandlerProps, DragSizingData, DragSizingProps } from './types';
+import {
+  DragHandlerProps,
+  DragSizingData,
+  DragSizingProps,
+  MEvent,
+  RdsMEvent,
+} from './types';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const isNil = (v: any) => v === null || v === undefined;
+
+export const normalizeMEvent = (e: MEvent): RdsMEvent => {
+  if ((e as TouchEvent).touches && (e as TouchEvent).touches[0]) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (e as any).clientX = Math.round((e as TouchEvent).touches[0].clientX);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (e as any).clientY = Math.round((e as TouchEvent).touches[0].clientY);
+  }
+  return e as RdsMEvent;
+};
 
 export const getContainerMeta = ({
   border,

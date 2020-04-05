@@ -18,7 +18,9 @@ export const DragHandler: React.FC<DragHandlerProps> = props => {
     const oldRef = listenersRef.current;
     if (oldRef) {
       window.removeEventListener('mousemove', oldRef.handleMouseMove);
+      window.removeEventListener('touchmove', oldRef.handleMouseMove);
       window.removeEventListener('mouseup', oldRef.handleMouseUp);
+      window.removeEventListener('touchend', oldRef.handleMouseUp);
     }
   }, []);
 
@@ -41,7 +43,9 @@ export const DragHandler: React.FC<DragHandlerProps> = props => {
         handleMouseUp,
       };
       window.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener('touchmove', handleMouseMove);
       window.addEventListener('mouseup', handleMouseUp);
+      window.addEventListener('touchend', handleMouseUp);
 
       onStart(e);
     },
@@ -58,6 +62,7 @@ export const DragHandler: React.FC<DragHandlerProps> = props => {
   return (
     <div
       onMouseDown={handleMouseDown}
+      onTouchStart={handleMouseDown}
       className={className}
       style={{
         cursor: `${dir}-resize`,
