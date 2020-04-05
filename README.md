@@ -1,6 +1,8 @@
 # react-drag-sizing
 
-- [x] "Drag to resize" as Component
+<img width="359" src="https://raw.githubusercontent.com/fritx/react-drag-sizing/master/demo.gif">
+
+- [x] "Drag to resize" (sizing) as React Component
 - [x] Rewritten with TS & React-hooks
 - [ ] Polyfill workaround with React < 16.8
 - [x] Support both mouse & touch
