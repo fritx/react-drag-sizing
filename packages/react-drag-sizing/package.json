@@ -1,0 +1,34 @@
+{
+  "name": "react-drag-sizing",
+  "version": "0.1.0-alpha.0",
+  "description": "",
+  "author": "fritx",
+  "license": "MIT",
+  "repository": "fritx/react-drag-sizing",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "jsnext:main": "dist/index.es.js",
+  "scripts": {
+    "prepublishOnly": "git stash -u && cp ../../README.md ./ && npm run build",
+    "postpublish": "rm README.md && git stash apply",
+    "build": "rollup -c",
+    "watch": "rollup -c -w"
+  },
+  "peerDependencies": {
+    "react": "^15.0.0 || ^16.0.0",
+    "react-dom": "^15.0.0 || ^16.0.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^11.0.2",
+    "@rollup/plugin-node-resolve": "^7.1.1",
+    "@rollup/plugin-url": "^4.0.2",
+    "rollup": "^1.31.1",
+    "rollup-plugin-peer-deps-external": "^2.2.2",
+    "rollup-plugin-postcss": "^2.1.1",
+    "rollup-plugin-typescript2": "^0.26.0"
+  },
+  "dependencies": {},
+  "files": [
+    "dist"
+  ]
+}

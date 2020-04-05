@@ -1,62 +1,113 @@
-# react-drag-resize
+# react-drag-sizing
 
-\[WIP\] "Drag to resize" as React Component.
+- [x] "Drag to resize" as Component
+- [x] Rewritten with TS & React-hooks
+- [ ] Polyfill workaround with React < 16.8
+- [x] Rollup bundle for both esm & umd
+- [x] Default handlerWidth=16, handlerOffset=-w/2, handlerZIndex=10
+- [x] Legacy branch: https://github.com/fritx/react-drag-sizing/tree/legacy
+- [x] Live Demo: https://fritx.github.io/react-drag-sizing
 
-<img width="359" src="demo.gif">
+```sh
+npm i -S react-drag-sizing
+```
 
-### Layout
-
-```js
-import DragResize from 'react-drag-resize'
+```tsx
+import DragSizing from 'react-drag-sizing'
 
 <div className="chat-top"></div>
 <div className="chat-body">
   <div className="chat-left">
     <MessageList />
-    <DragResize border="top"
-      handlerOffset={-4}
-      onStart={this.handleEditorResizeStart}
-      onEnd={this.handleEditorResizeEnd}>
+    <DragSizing border="top">
       <Editor />
-    </DragResize>
+    </DragSizing>
   </div>
   <div className="chat-right">
-    <DragResize border="left">
+    <DragSizing border="left">
       <MemberList />
-    </DragResize>
+    </DragSizing>
   </div>
 </div>
 ```
 
-### Hooks
+#### Props
 
-```js
-handleEditorResizeStart () {
-  this.shouldStickToBottom = true || false
+```tsx
+export interface DragSizingProps {
+  border: 'top' | 'bottom' | 'left' | 'right';
+  onStart?: DragHandlerProps['onStart'];
+  onEnd?: DragHandlerProps['onEnd'];
+  onUpdate?: DragHandlerProps['onUpdate'];
+  id?: string;
+  className?: string;
+  style?: React.CSSProperties;
+  handlerClassName?: string;
+  handlerStyle?: React.CSSProperties;
+  handlerWidth?: number;
+  handlerOffset?: number;
+  handlerZIndex?: number;
 }
-handleEditorResizeEnd () {
-  if (this.shouldTickToBottom) {
-    this.scrollToBottom()
+```
+
+**hooking event listeners**
+
+```tsx
+handleEditorSizingStart = () => {
+  // const nearBottom = scrollTop > ...
+  setShouldStickToBottom(nearBottom);
+};
+handleEditorSizingEnd = () => {
+  if (shouldStickToBottom) {
+    scrollToBottom();
   }
-}
+};
 
-<DragResize border="top"
-  onStart={this.handleEditorResizeStart}
-  onEnd={this.handleEditorResizeEnd}>
+<DragSizing
+  border="top"
+  onStart={handleEditorSizingStart}
+  onEnd={handleEditorSizingEnd}
+>
   <Editor />
-</DragResize>
+</DragSizing>;
 ```
 
-### Props
+**for umd / \<script> usage**
+
+```html
+<script src="https://unpkg.com/react"></script>
+<script src="https://unpkg.com/react-dom"></script>
+<script src="https://unpkg.com/react-drag-sizing"></script>
+<script src="myapp.js"></script>
+```
 
 ```js
-border: PropTypes.string.isRequired, // left|right|top|bottom
-onStart: PropTypes.func,
-onEnd: PropTypes.func,
-onUpdate: PropTypes.func,
-className: PropTypes.string,
-style: PropTypes.object,
-handlerClassName: PropTypes.string,
-handlerStyle: PropTypes.object,
-handlerWidth: PropTypes.number,
+// myapp.js
+let React = window.React;
+let ReactDOM = window.ReactDOM;
+let { DragSizing } = window.ReactDragSizing;
+
+ReactDOM.render(
+  <div style={{ display: 'flex' }}>
+    <sidebar style={{ flex: 1 }}>Left bar</sidebar>
+    <DragSizing
+      border="left"
+      style={{ minWidth: '15%', maxWidth: '85%', width: '50%' }}
+      handlerStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}
+    >
+      <main>Main content</main>
+    </DragSizing>
+  </div>,
+  mountNode
+);
 ```
+
+**for react < 16.8 we need hooks polyfill workaround**
+
+```tsx
+// todo
+```
+
+---
+
+This project was bootstrapped with [create-react-library](https://github.com/transitive-bullshit/create-react-library) & [react-ts-demo](https://github.com/fritx/react-ts-demo).
