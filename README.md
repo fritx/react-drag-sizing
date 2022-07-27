@@ -1,5 +1,7 @@
 # react-drag-sizing
 
+<a href="https://www.npmjs.com/package/react-drag-sizing"><img height="20" src="https://img.shields.io/npm/dm/react-drag-sizing.svg"></a>
+
 <img width="359" src="https://raw.githubusercontent.com/fritx/react-drag-sizing/master/demo.gif">
 
 - [x] "Drag to resize" (sizing) as React Component
