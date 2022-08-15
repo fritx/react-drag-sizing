@@ -2,8 +2,12 @@
   "name": "react-drag-sizing-repo",
   "version": "0.0.0",
   "private": true,
+  "engines": {
+    "npm": "please-use-yarn",
+    "yarn": "*"
+  },
   "scripts": {
-    "postinstall": "cd ./packages/react-drag-sizing && npm i && npm run build",
+    "postinstall": "cd ./packages/react-drag-sizing && yarn && npm run build",
     "lib:build": "cd ./packages/react-drag-sizing && npm run build",
     "lib:watch": "cd ./packages/react-drag-sizing && npm run watch",
     "lib:publish": "cd ./packages/react-drag-sizing && npm publish",
