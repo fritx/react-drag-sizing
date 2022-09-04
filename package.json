@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "engines": {
+    "pnpm": "please-use-yarn",
     "npm": "please-use-yarn",
     "yarn": "*"
   },

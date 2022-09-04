@@ -14,6 +14,7 @@ export interface DragHandlerProps {
   onUpdate: (e: MEvent) => void;
   className?: string;
   style?: React.CSSProperties;
+  children?: React.ReactNode | undefined;
 }
 
 export interface DragHandlerData {
@@ -36,6 +37,7 @@ export interface DragSizingProps {
   handlerWidth?: number;
   handlerOffset?: number;
   handlerZIndex?: number;
+  children?: React.ReactNode | undefined;
 }
 
 export interface DragSizingData {
